@@ -22,7 +22,7 @@ gulp.task('babel', ['clean'], () =>
         .pipe(gulp.dest('./lib'))
 )
 
-gulp.task('move', ['clean'], () =>
+gulp.task('move', ['babel'], () =>
     gulp.src(['./src/**/*.scss',
             './src/**/*.css',
             './src/**/*.png',
@@ -34,4 +34,4 @@ gulp.task('move', ['clean'], () =>
         .pipe(gulp.dest('./lib'))
 )
 
-gulp.task('default', ['babel', 'move'])
+gulp.task('default', ['move'])
