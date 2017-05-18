@@ -7,6 +7,7 @@ class ReactSwipe extends Component {
             startSlide: PropTypes.number,
             speed: PropTypes.number,
             auto: PropTypes.number,
+            scrollHold: PropTypes.number,
             continuous: PropTypes.bool,
             disableScroll: PropTypes.bool,
             stopPropagation: PropTypes.bool,
