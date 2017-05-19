@@ -49,6 +49,7 @@ ReactDOM.render(
 | swiping         |   invoked while swiping with the percentage (0-1) of the full width that has been swiped   | Function |   |   |
 | callback         |   runs at slide change   | Function |   |   |
 | transitionEnd         |   runs at the end slide transition   | Function |   |   |
+| scrollHold         |   avoid scroll when move distance is smaller than scrollHold   | Function |   | 10 |
 
 #### style
 
