@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import Swipe from 'silk-swipe';
 
 class ReactSwipe extends Component {
@@ -80,8 +80,28 @@ class ReactSwipe extends Component {
         this.swipe.next();
     }
 
+    cloneNodes(nodes, style, key) {
+        return React.Children.map(nodes, (child) => {
+            if (child instanceof Object) {
+                return React.cloneElement(child, {
+                    style: child.props.style ?
+                        Object.assign(child.props.style, style.child) : style.child,
+                    key: key ? `${child.key}${key}` : child.key
+                })
+            }
+            return child;
+        })
+    }
+
     render() {
-        const {id, className, style, children} = this.props; // eslint-disable-line react/prop-types
+        const {id, className, style, children, swipeOptions} = this.props; // eslint-disable-line react/prop-types
+
+
+        let slides = this.cloneNodes(children, style);
+
+        if (swipeOptions.continuous && children.length === 2) {
+            slides = slides.concat(this.cloneNodes(children, style, '2'));
+        }
 
         return (
             <div
@@ -90,17 +110,7 @@ class ReactSwipe extends Component {
                 style={style.container}
             >
                 <div style={style.wrapper}>
-
-                    {React.Children.map(children, (child) => {
-                        if (child instanceof Object) {
-                            return React.cloneElement(child, {
-                                style: child.props.style ?
-                                    Object.assign(child.props.style, style.child) : style.child
-                            })
-                        }
-                        return child;
-                    }
-                    )}
+                    {slides}
                 </div>
             </div>
         );
